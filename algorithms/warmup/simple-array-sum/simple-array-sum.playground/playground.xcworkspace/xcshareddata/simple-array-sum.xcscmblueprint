@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "2CCE5439B6F443709C89E325BD4E5FE8C6D922DB",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "77A689E5795FAF90D40D0B638E7DCF27AE23C6B4" : 0,
+    "2CCE5439B6F443709C89E325BD4E5FE8C6D922DB" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "99561ABD-DF0B-4174-B106-3136D9B10B2D",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "77A689E5795FAF90D40D0B638E7DCF27AE23C6B4" : "",
+    "2CCE5439B6F443709C89E325BD4E5FE8C6D922DB" : "hacker-rank\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "simple-array-sum",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "algorithms\/warmup\/simple-array-sum\/simple-array-sum.playground",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/dinhjeffrey\/hacker-rank.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "2CCE5439B6F443709C89E325BD4E5FE8C6D922DB"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/dinhjeffrey\/swift.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "77A689E5795FAF90D40D0B638E7DCF27AE23C6B4"
+    }
+  ]
+}
