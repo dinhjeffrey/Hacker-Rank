@@ -1,8 +1,6 @@
 //: Playground - noun: a place where people can play
 
 import Foundation
-
-import Foundation
 // Read the string
 var s = readLine()!
 let ampm = s.endIndex.advancedBy(-2) // last 2 indices of s
