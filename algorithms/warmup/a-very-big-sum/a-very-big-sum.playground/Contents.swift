@@ -12,7 +12,6 @@ var sum = 0
 for i in arr {
     // sum the array elements
     sum += i
-    
 }
 
 // prints the sum
