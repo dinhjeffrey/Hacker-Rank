@@ -1,32 +1,39 @@
-// Enter your code here
-import Foundation
+/*              (✿ ♥‿♥)                 ╘[◉﹃◉]╕                      ᕙ(⇀‸↼‶)ᕗ
+ Ｏ(≧▽≦)Ｏ	              ❤ New Year Chaos ❤                       ★~(◡﹏◕✿)
+ (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧            (づ￣ ³￣)づ                    (づ｡◕‿‿◕｡)づ
+ */
 
-let numTestCases: Int = Int(readLine()!)!
-for testCase in 1...numTestCases {
-    var tooChaotic = false
-    var count = 0
-    let numPeople: Int = Int(readLine()!)!
-    let finalPosition: [Int] = readLine()!.componentsSeparatedByString(" ").map{ Int($0)! }
-    for (index, element) in finalPosition.enumerate().reverse() {
-        guard (element >= index - 1) && (element <= index + 3) else { tooChaotic = true ; print("Too chaotic") ; break }
-        if element != index + 1 {
-            if element == index || element == index + 2 {
-                count += 1
-            } else if element == index - 1 || element == index + 3 {
-                count += 2
-            }
-        } else { // element == index + 1
-            guard index < finalPosition.count - 1 || index == 0 else { continue }
-            if (finalPosition[index-1] == element + 1) && (finalPosition[index+1] == element - 1) {
-                count += 2
-            }
+var testCases = Int(readLine()!)!
+
+for _ in (0..<testCases) {
+    var length = Int(readLine()!)!
+    var arr = readLine()!.characters.split(" ").map{Int(String($0))!}
+    
+    var index = 0, cnt = 0, sorted = true, chaotic = false
+    
+    for i in (0..<length) {
+        if arr[i] - i > 3 {
+            chaotic = true
+            break
         }
     }
-    if tooChaotic == false {
-        print(count/2)
+    
+    guard !chaotic else { print("Too chaotic") ; continue }
+    
+    while index < length - 1 { // i < 4
+        guard arr[index] > arr[index+1] else { index += 1; continue }
+        var tmp = arr[index]
+        arr[index] = arr[index+1]
+        arr[index+1] = tmp // switch places to sort it
+        cnt += 1
+        if index != 0 {
+            index -= 1
+        }
     }
+    print(cnt)
 }
 
 /*
- cat input01.txt | swift new-year-chaos.playground/Contents.swift
+ cat input00.txt | swift new-year-chaos.playground/Contents.swift
  */
+
