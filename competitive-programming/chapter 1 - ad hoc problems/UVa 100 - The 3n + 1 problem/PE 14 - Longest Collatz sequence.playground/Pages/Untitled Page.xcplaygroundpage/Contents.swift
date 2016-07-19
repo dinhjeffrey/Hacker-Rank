@@ -30,11 +30,13 @@ import Foundation
 //    return longestChain
 //}
 
-private func collatzLength(number: Int, inout cache: [Int]) -> Int {
+
+func collatzLength(number: Int, inout cache: [Int]) -> Int {
     var steps = 0
     var n = number
     
-    while n >= number { // the caching array is filled sequentially
+    while n >= number {
+        
         if n % 2 == 0 {
             n /= 2
         } else {
@@ -45,15 +47,16 @@ private func collatzLength(number: Int, inout cache: [Int]) -> Int {
     }
     steps += cache[n]
     cache[number] = steps
+    
     return steps
 }
 
 func longestCollatzSequence(maxNumber: Int) -> (number: Int, steps: Int) {
-    var collatzSequence = (number: 0, steps: 0)
+    var collatzSequence = (number:0, steps:0)
     var cache: [Int] = [Int](count: maxNumber, repeatedValue: 0)
     cache[1] = 1
     
-    for number in 2..<maxNumber {
+    for number in 2 ..< maxNumber {
         let steps = collatzLength(number, cache: &cache)
         if steps > collatzSequence.steps {
             collatzSequence = (number, steps)
@@ -62,12 +65,9 @@ func longestCollatzSequence(maxNumber: Int) -> (number: Int, steps: Int) {
     return collatzSequence
 }
 
-
 func euler14() {
-    
     let (number, _) = longestCollatzSequence(13)
-    
-    print("longestCollatzSequence(13) = \(number + 1)") // includes 1
+    print(number)
 }
 
 func printTimeElapsedWhenRunningCode(operation:() -> ()) {
