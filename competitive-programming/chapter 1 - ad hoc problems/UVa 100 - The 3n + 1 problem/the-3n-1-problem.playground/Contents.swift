@@ -5,15 +5,17 @@
 // Enter your code here
 var n = Int(readLine()!)!
 
-var count = 1 // cycles including the 1
+var count = 1
 
 while n != 1 {
     if n % 2 == 0 {
         n /= 2
+        count += 1
     } else {
         n = n * 3 + 1
+        n /= 2
+        count += 2
     }
-    count += 1
 }
 
 print(count)
