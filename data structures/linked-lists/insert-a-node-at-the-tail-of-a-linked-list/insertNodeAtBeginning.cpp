@@ -7,7 +7,7 @@ struct Node {
 };
 struct Node* head; // global variable
 void Insert(int x) {
-    Node* temp = new Node();
+    Node* temp = new Node;
     temp->data = x;
     temp->next = head; // same as temp->next = NULL; if (head != NULL) temp->next = head; // inserting at beginning so set head to the new insert
     head = temp;
