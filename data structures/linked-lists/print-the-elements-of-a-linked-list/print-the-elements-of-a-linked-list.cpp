@@ -11,7 +11,7 @@
 void Print(Node *head)
 {
     while(head != NULL) {
-        cout<< head->data <<endl; // sets head = data  cout: Standard output stream, endl: Insert newline and flush
-        head = head->next; // sets head = next
+        cout<< head->data <<endl; // prints head.data  cout: Standard output stream, endl: Insert newline and flush
+        head = head->next; // sets head = head.next (next link)
     }
 }
