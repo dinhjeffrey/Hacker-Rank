@@ -11,52 +11,69 @@ func readInteger() -> Int {
 }
 
 /// Returns an array of Characters
-func readStrings() -> [Character] {
+func readCharacters() -> [Character] {
     guard let line = readLine() else {
         fatalError("Unexpected end of input")
     }
-    return line.characters.map{ $0 }
+    return Array(line.characters)
 }
 
-// checks if all brackets are balanced
-func balancedBrackets() {
-    let sequences = readInteger()
-    // outloop loops through each sequence line
-    outerLoop: for _ in 0..<sequences {
-        // create a stack (array in this case)
-        var stack = [Character]()
-        // each line of sequence
-        let sequence = readStrings()
-        // edgeCase is when there are only opening brackets in stack and didn't reach case } ] )
-        var edgeCase = false
-        // inner loop loops through each bracket character
-        innerLoop: for bracket in sequence {
-            switch bracket {
-            // if opening brackets, append and set edgeCase
-            case "{", "[", "(":
-                stack.append(bracket)
-            // case closing brackets
-            case "}", "]", ")":
-                // checks for empty stack or if the bracket pairs arent matching
-                if stack.isEmpty || (bracket == "}" && stack.last != "{") || (bracket == "]" && stack.last != "[") || (bracket == ")" && stack.last != "(")  {
-                    edgeCase = true
-                    print("NO")
-                    // append closing bracket so YES doesn't print when breaking
-                    stack.append(bracket)
-                    // break out of checking anymore brackets
-                    break innerLoop
+enum Bracket: Character {
+    case Left = "("
+    case Right = ")"
+    case LeftCurly = "{"
+    case RightCurly = "}"
+    case LeftSquare = "["
+    case RightSquare = "]"
+    
+    /// For a closing bracket, the corresponding opening bracket is returned.
+    /// For an opening bracket, `nil` is returned.
+    var matchingOpen: Bracket? {
+        switch self {
+        case .Right:        return .Left
+        case .RightCurly:   return .LeftCurly
+        case .RightSquare:  return .LeftSquare
+        default:            return nil
+        }
+    }
+}
+
+func isBalanced(sequence: [Character]) -> Bool {
+    var stack = [Bracket]()
+    // loops through each bracket in a sequence
+    print(sequence)
+    for char in sequence {
+        // checks if `bracket` is in enum
+        if let bracket = Bracket(rawValue: char) {
+            // if `bracket` is a closing bracket, continue below
+            if let open = bracket.matchingOpen {
+                // `bracket` is a closing bracket and `open` the corresponding opening bracket:
+                print("bracket is \(bracket) and open is \(open)")
+                // if not matching bracket, return false
+                guard let last = stack.last where last == open  else {
+                    return false
                 }
+                // if matching bracket, removeLast
                 stack.removeLast()
-            default:
-                fatalError("unknown bracket found")
+            } else {
+                // `bracket` is an opening bracket:
+                stack.append(bracket)
             }
+        } else {
+            fatalError("unknown bracket found")
         }
-        // if empty
-        if stack.isEmpty {
-            print("YES")
-        } else if !edgeCase { // stack has opening brackets and hasn't reach if statement in case } ] )
-            print("NO")
-        }
+    }
+    // if stack is empty, all brackets match and returns true
+    // if not empty, not all brackets matched, returns false
+    return stack.isEmpty
+}
+
+func balancedBrackets() {
+    let numSequences = readInteger()
+    for _ in 0..<numSequences {
+        let sequence = readCharacters()
+        let balanced = isBalanced(sequence)
+        print(balanced ? "YES" : "NO")
     }
 }
 
@@ -68,5 +85,7 @@ balancedBrackets()
  cat input18.txt | swift balanced-brackets.playground/Contents.swift
  
  */
+
+
 
 
