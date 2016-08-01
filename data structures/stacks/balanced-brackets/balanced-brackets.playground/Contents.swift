@@ -23,35 +23,39 @@ func balancedBrackets() {
     let sequences = readInteger()
     // outloop loops through each sequence line
     outerLoop: for _ in 0..<sequences {
+        // create a stack (array in this case)
+        var stack = [Character]()
+        // each line of sequence
         let sequence = readStrings()
+        // edgeCase is when there are only opening brackets in stack and didn't reach case } ] )
+        var edgeCase = false
         // inner loop loops through each bracket character
-        innerLoop: for (index, bracket) in sequence.enumerate() {
-            //print("bracket is \(bracket) ... other bracket is \(sequence[sequence.count-1-index]) and index is \(index)")
-            let pairingBracket = sequence[sequence.count - 1 - index]
-            // if we reach halfway, then all brackets are matching
-            if index >= sequence.count/2 {print("YES");break}
-            //print("passed index: \(index)")
+        innerLoop: for bracket in sequence {
             switch bracket {
-            case "{":
-                // if pairing brackets, then break out of loop that checks each bracket in a sequence
-                // go on to next sequence
-                if  pairingBracket != "}" {
+            // if opening brackets, append and set edgeCase
+            case "{", "[", "(":
+                stack.append(bracket)
+            // case closing brackets
+            case "}", "]", ")":
+                // checks for empty stack or if the bracket pairs arent matching
+                if stack.isEmpty || (bracket == "}" && stack.last != "{") || (bracket == "]" && stack.last != "[") || (bracket == ")" && stack.last != "(")  {
+                    edgeCase = true
                     print("NO")
+                    // append closing bracket so YES doesn't print when breaking
+                    stack.append(bracket)
+                    // break out of checking anymore brackets
                     break innerLoop
                 }
-            case "(":
-                if  pairingBracket != ")" {
-                    print("NO")
-                    break innerLoop
-                }
-            case "[":
-                if  pairingBracket != "]" {
-                    print("NO")
-                    break innerLoop
-                }
+                stack.removeLast()
             default:
                 fatalError("unknown bracket found")
             }
+        }
+        // if empty
+        if stack.isEmpty {
+            print("YES")
+        } else if !edgeCase { // stack has opening brackets and hasn't reach if statement in case } ] )
+            print("NO")
         }
     }
 }
