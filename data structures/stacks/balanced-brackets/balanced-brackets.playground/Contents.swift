@@ -41,14 +41,12 @@ enum Bracket: Character {
 func isBalanced(sequence: [Character]) -> Bool {
     var stack = [Bracket]()
     // loops through each bracket in a sequence
-    print(sequence)
     for char in sequence {
         // checks if `bracket` is in enum
         if let bracket = Bracket(rawValue: char) {
             // if `bracket` is a closing bracket, continue below
             if let open = bracket.matchingOpen {
                 // `bracket` is a closing bracket and `open` the corresponding opening bracket:
-                print("bracket is \(bracket) and open is \(open)")
                 // if not matching bracket, return false
                 guard let last = stack.last where last == open  else {
                     return false
