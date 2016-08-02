@@ -19,35 +19,34 @@ func readIntegers() -> [Int] {
     return line.componentsSeparatedByString(" ").map{ Int($0)! }
 }
 
-// returns maximum element in stack
-func maxElement() {
+var stack = [Int]()
+
+func inputs() {
     let queries = readInteger()
-    var stack = [Int]()
-    
-    // loops through each query
     for _ in 0..<queries {
         let input = readIntegers()
-        let type = input[0]
-        switch type {
-        case 1:
-            // 2nd input only given when type is 1
-            let element = input[1]
-            stack.append(element)
-        case 2:
-            // deletes element at top of the stack
-            // stack is LIFO
-            stack.removeLast()
-        case 3:
-            if let maxElement = stack.maxElement() {
-                print(maxElement)
-            }
-        default:
-            fatalError("Unknown input type")
-        }
+        maxElement(input)
     }
 }
 
-maxElement()
+func maxElement(input: [Int]) {
+    let type = input[0]
+    switch type {
+    case 1:
+        let element = input[1]
+        stack.append(element)
+    case 2:
+        stack.removeLast()
+    case 3:
+        if let maxElement = stack.maxElement() {
+            print(maxElement)
+        }
+    default:
+        fatalError("unknown input type")
+    }
+}
+
+inputs()
 
 /*
  

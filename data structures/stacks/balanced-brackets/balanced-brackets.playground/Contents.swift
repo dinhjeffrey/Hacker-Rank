@@ -43,23 +43,14 @@ func isBalanced(sequence: [Character]) -> Bool {
     // loops through each bracket in a sequence
     for char in sequence {
         // checks if `bracket` is in enum
-        if let bracket = Bracket(rawValue: char) {
-            // if `bracket` is a closing bracket, continue below
-            if let open = bracket.matchingOpen {
-                // `bracket` is a closing bracket and `open` the corresponding opening bracket:
-                // if not matching bracket, return false
-                guard let last = stack.last where last == open  else {
-                    return false
-                }
-                // if matching bracket, removeLast
-                stack.removeLast()
-            } else {
-                // `bracket` is an opening bracket:
-                stack.append(bracket)
-            }
-        } else {
-            fatalError("unknown bracket found")
-        }
+        guard let bracket = Bracket(rawValue: char) else { fatalError("unknown bracket found");continue }
+        // if `bracket` is a closing bracket, continue below
+        guard let open = bracket.matchingOpen else { stack.append(bracket);continue }
+        // `bracket` is a closing bracket and `open` the corresponding opening bracket:
+        // if not matching bracket, return false
+        guard let last = stack.last where last == open  else { return false }
+        // if matching bracket, removeLast
+        stack.removeLast()
     }
     // if stack is empty, all brackets match and returns true
     // if not empty, not all brackets matched, returns false
