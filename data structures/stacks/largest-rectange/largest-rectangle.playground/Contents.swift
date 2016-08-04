@@ -39,8 +39,7 @@ func getMaxArea(numBuildings: Int, heightBuildings hist: [Int]) {
             // with stack top as the smallest (or minimum height) bar. 'i' is
             // 'right index' for the top and element before top in stack is 'left index'
         else {
-            guard let last = stack.last else { continue }  // store the top index
-            top = last
+            top = stack.last! // store the top index
             
             stack.removeLast()  // pop the top
             
@@ -58,11 +57,11 @@ func getMaxArea(numBuildings: Int, heightBuildings hist: [Int]) {
     // Now pop the remaining bars from stack and calculate area with every
     // popped bar as the smallest bar
     while stack.isEmpty == false {
-        guard let last = stack.last else { continue }
-        top = last
+        top = stack.last!
         //print("stack is: \(stack)")
         stack.removeLast()
-        // stack.last got changed, use stack.last! 
+        // stack.last got changed, use stack.last!
+
         areaWithTop = hist[top] * (stack.isEmpty ? index : index - stack.last! - 1)
         //print("top is: \(top)")
         //print("areaWithTop is: \(areaWithTop)")
