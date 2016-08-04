@@ -26,27 +26,29 @@ func getMaxArea(numBuildings: Int, heightBuildings hist: [Int]) {
     
     var index = 0
     // Run through all bars of given histogram
+    
     while index < numBuildings {
-       // print("index is \(index)")
-        // If this bar is higher than the bar on top stack, push it to stack
+        
+        // If last height in hist is smaller than current height, push it to stack
         if stack.isEmpty || hist[stack.last!] <= hist[index] {
             stack.append(index)
             index += 1
         }
+       
             
             
             // If this bar is lower than top of stack, then calculate area of rectangle
             // with stack top as the smallest (or minimum height) bar. 'i' is
             // 'right index' for the top and element before top in stack is 'left index'
         else {
-            top = stack.last! // store the top index
-            
-            stack.removeLast()  // pop the top
+            top = stack.removeLast() // store the top index and  pop the top
             
             // Calculate the area with hist[tp] stack as smallest bar
             // stack.last got changed, use stack.last!
+            // if current in hist is smaller than last in hist, get it's area and delete last index in stack
             areaWithTop = hist[top] * (stack.isEmpty ? index : index - stack.last! - 1)
             
+
             // update max area, if needed
             if maxArea < areaWithTop {
                 maxArea = areaWithTop
@@ -56,15 +58,11 @@ func getMaxArea(numBuildings: Int, heightBuildings hist: [Int]) {
     
     // Now pop the remaining bars from stack and calculate area with every
     // popped bar as the smallest bar
-    while stack.isEmpty == false {
-        top = stack.last!
-        //print("stack is: \(stack)")
-        stack.removeLast()
+    while !stack.isEmpty {
+        top = stack.removeLast()
         // stack.last got changed, use stack.last!
 
         areaWithTop = hist[top] * (stack.isEmpty ? index : index - stack.last! - 1)
-        //print("top is: \(top)")
-        //print("areaWithTop is: \(areaWithTop)")
         
         if maxArea < areaWithTop {
             maxArea = areaWithTop
