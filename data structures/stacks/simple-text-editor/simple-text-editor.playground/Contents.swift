@@ -1,5 +1,3 @@
-//: Playground - noun: a place where people can play
-
 import Foundation
 
 func readInteger() -> Int {
@@ -19,21 +17,22 @@ var stack = [String]()
 var string = String()
 
 enum Type: Int {
-    case one = 1, two, three, four
+    case append = 1, delete, print, undo
 }
 
 func textEditor(operation: [String]) {
     guard let type = Type(rawValue: Int(operation[0])!) else { fatalError("unknown type") }
     switch type {
-    case .one:
+    case .append:
+        stack.append(string)
         string += operation[1]
+    case .delete:
+        guard string.characters.count > Int(operation[1]) else { stack.append(string); string = ""; return }
         stack.append(string)
-    case .two:
         string = string.substringToIndex(string.endIndex.advancedBy(-Int(operation[1])!))
-        stack.append(string)
-    case .three:
-        print(string[string.startIndex.advancedBy(Int(operation[1])!)])
-    case .four:
+    case .print:
+        print(string[string.startIndex.advancedBy(Int(operation[1])!-1)])
+    case .undo:
         if !stack.isEmpty {
             string = stack.last!
             stack.popLast()
@@ -50,5 +49,13 @@ func inputs() {
 }
 
 inputs()
+
+/*
+ 
+ //Then, on the command line use something like...
+ cat input00.txt | swift simple-text-editor.playground/Contents.swift
+ 
+ */
+
 
 
