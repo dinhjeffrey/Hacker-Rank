@@ -18,21 +18,28 @@ func dayStopDying(plantPesticide: [Int]) {
     // holds first value of plantPesticide
     let firstValue = plantPesticide.first
     // start from 1...lastValue
-    var plantPesticideAdjusted = plantPesticide[1..<plantPesticide.count]
-    var lastDay = false
-    while lastDay == false {
+    var plantPesticideAdjusted = Array(plantPesticide[1..<plantPesticide.count])
+    var lastDay = [Int]()
+    var dayCount = 0
+    while lastDay != plantPesticideAdjusted {
         // keeps track of last value being compared to
+        lastDay = plantPesticideAdjusted
         var lastValue = firstValue
-        let alivePlants = plantPesticideAdjusted.filter{
-//            if $0 > lastValue {
-//                lastValue = $0
-//            }
-//            return $0 > lastValue
+        plantPesticideAdjusted = plantPesticideAdjusted.filter{
+            let temp = lastValue
+            lastValue = $0
+            return $0 < temp
         }
+        dayCount += 1
+        print(dayCount)
+    }
+    let dayAdjusted = dayCount - 1  // because it runs an extra time to check
+    if dayAdjusted == 1 {
+        print(0) // if days never incremented
+    } else {
+        print(dayAdjusted)
     }
 }
-
-
 
 // reads input
 func input() {
@@ -41,3 +48,11 @@ func input() {
     dayStopDying(plantPesticide)
 }
 
+input()
+
+/*
+ 
+ //Then, on the command line use something like...
+ cat input00.txt | swift Poisonous-Plants.playground/Contents.swift
+ 
+ */
