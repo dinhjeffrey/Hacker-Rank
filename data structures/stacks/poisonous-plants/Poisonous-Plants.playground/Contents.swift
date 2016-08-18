@@ -14,10 +14,10 @@ func readIntegers() -> [Int] {
     return ints
 }
 
-func dayStopDying(plantPesticide: [Int]) {
-    var s = [Int](count: plantPesticide.count, repeatedValue: 0)
+func poison(plant: [Int]) {
+    var s = [Int](count: plant.count, repeatedValue: 0)
     s[0] = 0
-    var k = [Int](count: plantPesticide.count, repeatedValue: 0)
+    var k = [Int](count: plant.count, repeatedValue: 0)
     k[0] = -1
     
     // stack contains last seen plant index
@@ -28,12 +28,12 @@ func dayStopDying(plantPesticide: [Int]) {
     
     // index of current plant
     var i = 1
-    let n = plantPesticide.count
-    while i<n {
-        // the generation plantPesticide[i] survived to
+    let n = plant.count
+    while i < n {
+        // the generation plant[i] survived to
         var generation = 0
         // while last-seen plants are not killers of the current plant plantPesiticide[i]
-        while !stack.isEmpty && plantPesticide[stack.last!] >= plantPesticide[i] {
+        while !stack.isEmpty && plant[stack.last!] >= plant[i] {
             generation = max(generation, s[stack.last!])
             stack.popLast()
         }
@@ -55,8 +55,8 @@ func dayStopDying(plantPesticide: [Int]) {
 // reads input
 func input() {
     let _ = readInteger()
-    let plantPesticide = readIntegers()
-    dayStopDying(plantPesticide)
+    let plant = readIntegers()
+    poison(plant)
 }
 
 input()
